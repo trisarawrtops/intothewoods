@@ -25,6 +25,7 @@
 (set: $boss to &quot;Farmer&quot;)
 (set: $chase to 1)
 (set: $huntergift to false)
+(set: $light to false)
 
 (align:&quot;=&gt;&lt;=&quot;)[&lt;img style=&quot;float:left;&quot; alt=&quot;This is You.&quot; src=&quot;/images/playeravatar.jpg&quot;&gt;]
 You are a young girl, an orphan after the sickness took your parents last winter. You have been working for the Village (cycling-link: bind $boss, &quot;Farmer&quot;, &quot;Innkeeper&quot;, &quot;Constable&quot;, &quot;Merchant&quot;, &quot;Clergy&quot;) since then.
@@ -87,7 +88,7 @@ Everyone knows the stories, but you&#39;ve never believed them. You stop to scof
 
 A (cycling-link: bind $bird, &quot;Cardinal&quot;,&quot;Bluebird&quot;,&quot;Sparrow&quot;,&quot;Magpie&quot;,&quot;Grackle&quot;) lands on your shoulder and gives your ear a peck.
 
-&quot;The name&#39;s Izzy, you look like you could use some help.&quot; the (live: 1s)[$bird] chortles, &quot;Those dogs don&#39;t seem friendly.&quot;
+&quot;The name&#39;s Izzy, you look like you could use some help.&quot; the (live: 1s)[$bird] chortles, &quot;Those dogs don&#39;t seem friendly.&quot;(stop:)
 
 (if:$chase &lt; 4)[(display: &#39;gamepath1a&#39;)]
 (else-if:$chase &gt;= 10)[=
@@ -168,20 +169,20 @@ When you reach the other bank, you are delighted to find a carved wooden whistle
 The fire has recently been put out, and the tent is closed up. It doesn&#39;t appear that anyone is around.
 
 (t8n-time:1.3s)[[Continue on your way.-&gt;gamepath1]]
-(t8n-time:1.3s)[[Inspect the tent.-&gt;tent]]</tw-passagedata><tw-passagedata pid="23" name="gamepath4" tags="" position="1778,702" size="100,100">Gnarled branches reach for you as you make your way through this twisted section of the forest. As you push deeper, they seem to be actively reaching for you. After one particularly nasty incident with a crabapple tree, you trip... and fall far further than you would anticipate.
-|disappearing&gt;[Your Text Here(if:$inv contains &quot;RedShawl&quot;) or (if:$inv contains &quot;WalkingStick&quot;)[Use an item to help!(link:&quot;Use an item to help!&quot;)[(display:&quot;gamepath4a&quot;)]]]
-(live: 5s)[(replace: ?disappearing)[Oh no! You didn&#39;t react in time, and now you&#39;re really screwed! (display:&quot;gamepath4b&quot;)](stop:)
-(else:(display:&quot;gamepath4b&quot;))[]</tw-passagedata><tw-passagedata pid="24" name="tent" tags="" position="1616,338" size="100,100">This ancient tent has been patched and repaired so many times, it&#39;s difficult to say what it was originally made out of. Furs and skins from every creature you know - and some that you don&#39;t - are sewn together with expert precision. You doubt any water leaks through during the rains, and it&#39;s probably warmer than you&#39;re used to in the winter.
+(t8n-time:1.3s)[[Inspect the tent.-&gt;tent]]</tw-passagedata><tw-passagedata pid="23" name="gamepath4" tags="" position="1713,760" size="100,100">Gnarled branches reach for you as you make your way through this twisted section of the forest. As you push deeper, they seem to be actively reaching for you. After one particularly nasty incident with a crabapple tree, you trip... and fall far further than you would anticipate.
+|disappearing&gt;[(if:$inv contains &quot;RedShawl&quot;) or (if:$inv contains &quot;WalkingStick&quot;)[Use an item to help!(link:&quot;Use an item to help!&quot;)[(display:&quot;gamepath4a&quot;)]]]
+(live: 15s)[(replace: ?disappearing)[Oh no! You didn&#39;t react in time, and now you&#39;re really screwed! (display:&quot;gamepath4b&quot;)]]
+(live: 20s)[(else:(display:&quot;gamepath4b&quot;))[]]</tw-passagedata><tw-passagedata pid="24" name="tent" tags="" position="1616,338" size="100,100">This ancient tent has been patched and repaired so many times, it&#39;s difficult to say what it was originally made out of. Furs and skins from every creature you know - and some that you don&#39;t - are sewn together with expert precision. You doubt any water leaks through during the rains, and it&#39;s probably warmer than you&#39;re used to in the winter.
 
 Propped up next to the tent flap, as if they had been forgotten, are a quiver of arrows and a large chunk of beeswax. You quickly put on the quiver - if only you had a bow!(set: $inv to it + (a:&quot;Arrows&quot;))
 
 (t8n-time:1.3s)[[The hounds are baying.-&gt;gamepath1]](set: $chase to it + 1)</tw-passagedata><tw-passagedata pid="25" name="gamepath1a" tags="" position="1970,335" size="100,100">&quot;I would really really like to help you, but we really really need to go! Follow me!&quot;
 
-The (live: 1s)[$bird] flies off, and after a moment, you run after it. Him? Her? They? Maybe you really are a witch - you just had a conversation with a bird!
+The (live: 1s)[$bird] flies off, and after a moment, you run after it. Him? Her? They? Maybe you really are a witch - you just had a conversation with a bird!(stop:)
 
 (t8n-time:1.3s)[[Run after your feathered friend.-&gt;gamepath2]]
 (t8n-time:1.3s)[[Go your own way.-&gt;gamepath4]]
-(stop:)</tw-passagedata><tw-passagedata pid="26" name="chasefail" tags="" position="2058,74" size="100,100">The dogs are nipping at your heels, and you can hear people you once knew not far behind. You desperately try to escape, but the hounds have your scent and some are even within sight of you. 
+</tw-passagedata><tw-passagedata pid="26" name="chasefail" tags="" position="2058,74" size="100,100">The dogs are nipping at your heels, and you can hear people you once knew not far behind. You desperately try to escape, but the hounds have your scent and some are even within sight of you. 
 
 You run blindly though the woods, falling and rolling down hills in a desperate attempt to get anywhere but here.
 
@@ -191,7 +192,9 @@ The villagers brought you back to your village, where the Constable declared you
 
 Tomorrow at dawn, you hang. Silently pleading with the universe for some sort of justice in this cruel world, you have the sudden thought:
 
-What if you could go back?</tw-passagedata><tw-passagedata pid="27" name="gamepath2" tags="" position="1816,473" size="100,100">The path really narrows here, with gorse bushes pressing in on the sides. You are taken by surprise to see a very large man blocking the path just around a blind corner.
+What if you could go back?
+
+(t8n-time:1.3s)+(link:&quot;Try Again&quot;)[(restart:)]</tw-passagedata><tw-passagedata pid="27" name="gamepath2" tags="" position="1816,473" size="100,100">The path really narrows here, with gorse bushes pressing in on the sides. You are taken by surprise to see a very large man blocking the path just around a blind corner.
 
 (t8n-time:1.3s)[[Talk to the man.-&gt;hunterconvo]]
 (t8n-time:1.3s)[[Run away.-&gt;gamepath3]]</tw-passagedata><tw-passagedata pid="28" name="hunterconvo" tags="" position="2176,512" size="100,100">
@@ -209,15 +212,15 @@ The hunter roars at his own joke, startling some rabbits out of a nearby bush. H
 (live: 1s)[(if:$huntergift is false) + (if:$inv contains &quot;Arrows&quot;) [(link:&quot;Offer him the Quiver of Arrows.&quot;)[&quot;Thank you, little fox! My family will not go hungry tonight. Now you better scarper, fast now!&quot;(set: $huntergift to true)]]]
 (live: 1s)[(if:$huntergift is false)[(t8n-time:1.3s)[[You give a pathetic look to the unsympathetic man, and start pushing through the bushes.-&gt;gorsebush]]]]
 (live: 1s)[(if:$huntergift is true)[(t8n-time:1.3s)[[The Hunter steps aside, and you continue.-&gt;gamepath3]]]]
-(stop:)</tw-passagedata><tw-passagedata pid="29" name="gamepath3" tags="" position="1890,618" size="100,100">You run along the path, trusting that it will lead you away from your pursuers. After several bends and switchbacks, you look back and realize that you&#39;ve descended a cliff.
+(stop:)</tw-passagedata><tw-passagedata pid="29" name="gamepath3" tags="" position="1842,605" size="100,100">You run along the path, trusting that it will lead you away from your pursuers. After several bends and switchbacks, you look back and realize that you&#39;ve descended a cliff.
 
 The woods around you are older, more overgrown, and you almost feel like the trees are watching you.
 
-(if:$boss is &quot;Farmer&quot;)[Your days on the farm were mostly spent gathering water and chopping firewood, but you are thankful for the work now, as you notice a few broken branches that indicate an old path. There is also the sound of rushing water coming somewhere to your right.]
-(else-if:$boss is &quot;Innkeeper&quot;)[You are not prepared to be this far away from civilization. After a few futile attempts to break through the brush, you hear a screech and a loud whooshing sound coming at you from the canopy. You blindly run into the forest.]
-(else-if:$boss is &quot;Constable&quot;)[Following the Constable around on her investigations has made you more aware of your surroundings. You can hear the [$bird] somewhere up ahead and to the left the ground starts to rise, so there must be a hill of some sort that way.]
-(else-if:$boss is &quot;Merchant&quot;)[You don&#39;t know too much about the forest, but you do know a particular landmark you can see - a large dead oak. The road should be to your right. Or you can try going deeper into the forest.]
-(else-if:$boss is &quot;Clergy&quot;)[You have never been this far, but you do think you can tell that the road is up ahead. Or you can try going deeper into the forest to the left.]</tw-passagedata><tw-passagedata pid="30" name="gorsebush" tags="" position="2188,724" size="100,100">(if:$chase &gt;= 7)[The dogs are right behind you. You run deeper into the thicket, only to find yourself penned in. You only have a few seconds to act.
+(if:$boss is &quot;Farmer&quot;)[Your days on the farm were mostly spent gathering water and chopping firewood, but you are thankful for the work now, as you notice a few broken branches that indicate (t8n-time:1.3s)[[an old path-&gt;gamepath6]]. There is also the sound of rushing water coming somewhere (t8n-time:1.3s)[[to your right-&gt;waterfall]].]
+(else-if:$boss is &quot;Innkeeper&quot;)[You are not prepared to be this far away from civilization. After a few futile attempts to break through the brush, you hear a screech and a loud whooshing sound coming at you from the canopy. (t8n-time:1.3s)[[You blindly run into the forest-&gt;gamepath4]].]
+(else-if:$boss is &quot;Constable&quot;)[Following the Constable around on her investigations has made you more aware of your surroundings. You can hear the [$bird] somewhere up ahead and to the left the ground starts to rise, so there must be a hill of some sort (t8n-time:1.3s)[[that way-&gt;gamepath5]].]
+(else-if:$boss is &quot;Merchant&quot;)[You don&#39;t know too much about the forest, but you do know a particular landmark you can see - a large dead oak. The road should be (t8n-time:1.3s)[[to your right-&gt;Road4]]. Or you can try going (t8n-time:1.3s)[[deeper into the forest-&gt;gamepath6]].]
+(else-if:$boss is &quot;Clergy&quot;)[You have never been this far, but you do think that (t8n-time:1.3s)[[the road is up ahead.-&gt;Road2]] Or you can try going (t8n-time:1.3s)[[deeper into the forest-&gt;gamepath6]] to the left.]</tw-passagedata><tw-passagedata pid="30" name="gorsebush" tags="" position="2163,666" size="100,100">(if:$chase &gt;= 7)[The dogs are right behind you. You run deeper into the thicket, only to find yourself penned in. You only have a few seconds to act.
 (t8n-time:1.3s)[[Quick! Dive in!-&gt;gamepath4]]
 (after:5s)[(go-to:&quot;chasefail&quot;)]]
 (else-if:$chase &lt;=6)[=Izzy the [$bird] appears, 
@@ -227,8 +230,50 @@ The woods around you are older, more overgrown, and you almost feel like the tre
 (else-if:$bird is &quot;Grackle&quot;)[yelling his battlecry of &quot;SCREEEEEE!&quot; before divebombing the dogs with precision. After a few moments of this, the hounds can&#39;t take anymore and run away yelping. Izzy does a proud strutting dance on the ground, and leads you further down the path. (set:$chase to it -3)]
 (else-if:$bird is &quot;Sparrow&quot;)[screaming out, &quot;SCREEHAW!!&quot; and making several dives at the pack. The dogs immediately try to get the attacking bird, who just keeps yelling out weird things. After a few moments, you notice a break in the bushes and quickly make your exit. (set:$chase to it -2)]
 
-(t8n-time:1.3s)[[Continue.-&gt;gamepath4]]</tw-passagedata><tw-passagedata pid="31" name="gamepath4a" tags="" position="1913,828" size="100,100">You use your (if:$inv contains &quot;RedShawl&quot;)[(link-reveal:&quot;Red Shawl&quot;)[ to lash onto a protruding root, catching yourself against the dirt wall of a deep pit. You saved yourself! But who put this giant pit here, and why? You should be more careful.]](else-if:$inv contains &quot;WalkingStick&quot;)[(link-reveal:&quot;Walking Stick&quot;)[ and manage to stick it sideways across the pit. After several scary moments of hanging above a dark pit and trying to pull yourself over to the edge, you make it! Pulling yourself up over the lip, you take a well earned breather. You should be more careful.]](else:)[How the heck did you get here, if you don&#39;t have a Walking Stick or a Red Shawl?! Seriously, I&#39;d like to know.]
-(t8n-time:1.3s)[[Continue cautiously.-&gt;gamepath5]]</tw-passagedata><tw-passagedata pid="32" name="gamepath4b" tags="" position="2028,829" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="33" name="gamepath5" tags="" position="1775,861" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="34" name="PlayerAvatar" tags="" position="1304,11" size="100,100">(b4r:&quot;double&quot;)+(b4r-colour:white)[(align:&quot;=&gt;&lt;=&quot;)[&lt;img alt=&quot;This is You.&quot; src=&quot;/images/playeravatar.jpg&quot;&gt;]]</tw-passagedata></tw-storydata>
+(t8n-time:1.3s)[[Continue.-&gt;gamepath4]]</tw-passagedata><tw-passagedata pid="31" name="gamepath4a" tags="" position="1963,763" size="100,100">You use your (if:$inv contains &quot;RedShawl&quot;)[(link-reveal:&quot;Red Shawl&quot;)[ to lash onto a protruding root, catching yourself against the dirt wall of a deep pit. You saved yourself! But who put this giant pit here, and why? You should be more careful.]](else-if:$inv contains &quot;WalkingStick&quot;)[(link-reveal:&quot;Walking Stick&quot;)[ and manage to stick it sideways across the pit. After several scary moments of hanging above a dark pit and trying to pull yourself over to the edge, you make it! Pulling yourself up over the lip, you take a well earned breather. You should be more careful.]](else:)[How the heck did you get here, if you don&#39;t have a Walking Stick or a Red Shawl?! Seriously, I&#39;d like to know.]
+(t8n-time:1.3s)[[Continue cautiously.-&gt;gamepath5]]</tw-passagedata><tw-passagedata pid="32" name="gamepath4b" tags="" position="2089,778" size="100,100">Landing flat on your back, it takes a few moments before the stars in your eyes clear. Sitting up and looking around, there doesn&#39;t seemto be much here. There&#39;s a flat cannister of some sort next to you, and a bit of broken wood. The light from above is fading fast.
+
+(link-reveal:&quot;Look at cannister&quot;)[You pick up the small tin, and hear a sloshing of liquid inside. Taking the cap off, you smell the distinct scent of lantern oil.
+(if: $inv contains &quot;Lantern&quot;)[(link-reveal:&quot;Fill the lantern.&quot;)[It&#39;s difficult in the dim light, but you eventually manage to fill the lantern without spilling the oil. You are barely able to catch a spark, but your lantern is now lit.(set: $light to true)]
+]]
+(live: 3s)(if:$light is true)[Light fills the small pit, and to your horror you can see you are not the first victim here. Several skeletons - both human and animal - are scattered across the ground. Looking around the walls, your lantern reveals a passage (t8n-time:1.3s)[[to your right-&gt;puzzle]].]
+(else-if:$light is false)[You can&#39;t make out much in the dying light, but you do see what looks like some planks leaning up against one wall. You could (t8n-time:1.3s)[[try climbing out-&gt;climb]].](stop:)</tw-passagedata><tw-passagedata pid="33" name="gamepath5" tags="" position="1826,853" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="34" name="PlayerAvatar" tags="" position="1304,11" size="100,100">(b4r:&quot;double&quot;)+(b4r-colour:white)[(align:&quot;=&gt;&lt;=&quot;)[&lt;img alt=&quot;This is You.&quot; src=&quot;/images/playeravatar.jpg&quot;&gt;]]</tw-passagedata><tw-passagedata pid="35" name="puzzle" tags="" position="2027,979" size="100,100">The dark passage winds away from the pit, earthen walls and ceiling crumbling around you. After a few twists, the tunnel gives way to ancient worked stone.
+
+Flickering over the rock, the lantern light reveals carved figures and words. You never learned to read very well, but you might be able to figure out what it says.
+
+(t8n-time:1.3s)+[[Try to decipher the carvings.-&gt;carvings]]
+(t8n-time:1.3s)[[Continue down the passage.-&gt;letterpuzzle]]</tw-passagedata><tw-passagedata pid="36" name="climb" tags="" position="2148,979" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="37" name="carvings" tags="" position="1911,1085" size="100,100">These old carvings have human figures, animal figures, and some sort of writing. Moving forward, you hold the lantern up to see what you can make of it.
+
+(if:$boss is &quot;Merchant&quot; or &quot;Clergy&quot;)[(set:$carving to 3)The figures don&#39;t make a whole lot of sense to you, but you recognize the letters. With a bit of work, you could probably figure out what they say.]
+(else-if:$boss is &quot;Innkeeper&quot; or &quot;Constable&quot;)[(set:$carving to 2)Your time with your boss taught you more than you thought - you can definitely see a pattern here, it&#39;s just a matter of whether you want to spend the time figuring it out or not.]
+(else-if:$boss is &quot;Farmer&quot;)[(set:$carving to 4)On the farm, you often had to go down into the caves to get mushrooms, and you&#39;re familiar with similar carvings. You feel like you could easily decipher this.]
+(if:$carving &lt; 6)[(t8n-time:1.3s)+(link-rerun:&quot;Study the carvings further.&quot;)[(either:...$lookcarving)]]
+(else-if:$carving &gt; 6)[Finally! It&#39;s taken more effort than you thought, but you&#39;ve finally figured out what this thing means! It&#39;s referring to the number of seasons, and some sort of puzzle up ahead. Odd. (t8n-time:1.3s)+(link:&quot;Everyone knows how many seasons there are.&quot;)[Well, maybe some people don&#39;t know about growing, harvest, and winter seasons. Could there be more than three seasons somewhere else? Your head starts to hurt trying to imagine what it could be like.]]
+(after: 5s)+(else-if:$carving is 0)[You&#39;ve gleaned everything you can here, though you feel like you&#39;ve missed something.]
+(t8n-time:1.3s)[[Go back.-&gt;gamepath4b]]
+(t8n-time:1.3s)[[See what lies ahead.-&gt;letterpuzzle]]
+(set: $lookcarving to (a:(set:$carving to it)[You can&#39;t really make heads or tails of this.],(set:$carving to it +1)[Aha! You decipher another piece of the puzzle!],(set:$carving to it -1)[UGH! These damned carvings are driving you mad! You&#39;re more confused now than you were before.]))</tw-passagedata><tw-passagedata pid="38" name="letterpuzzle" tags="" position="2078,1147" size="100,100">(set: _hand to false)
+A strange (either:&quot;ancient&quot;,&quot;old&quot;,&quot;gnarled&quot;,&quot;decrepit&quot;) doorway makes up the entire end of this passageway. Carved beside the door in large letters is the following:
+
+(align:&quot;=&gt;&lt;=&quot;)[//To find your way, you must risk it all.
+just as Winter follows Fall.
+And if you need one clue:
+It isn&#39;t just numbers, it&#39;s the letters too.//]
+
+Five large holes are in the walls, with a partially destroyed plague above:
+(align:&quot;=&gt;&lt;=&quot;)[//Sixteen to seven. Eight to five. Two to .....//]
+
+(t8n-time:1.3s)+(link-reveal:&quot;Look at the holes.&quot;)[The holes are large enough for you to stick your hand into. You cannot see what lies within, however.]
+(live: 1s)
+(if:_hand is false)[(show:(t8n-time:1.3s)+(link:&quot;Put your hand in the first hole.&quot;)[(set:_hand to true)You reach inside, and feel a lever. (t8n-time:1.3s)+(link:&quot;Pull the lever.&quot;)[(t8n-time:1.3s)[[Are you sure?-&gt;letterpuzzlefailure]]]])]
+(if:_hand is false)[(show:(t8n-time:1.3s)+(link:&quot;Put your hand in the second hole.&quot;)[(set:_hand to true)You reach inside, and feel a lever. (t8n-time:1.3s)+(link:&quot;Pull the lever.&quot;)[(t8n-time:1.3s)[[Are you sure?-&gt;letterpuzzlefailure]]]])]
+(if:_hand is false)[(show:(t8n-time:1.3s)+(link:&quot;Put your hand in the third hole.&quot;)[(set:_hand to true)You reach inside, and feel a lever. (t8n-time:1.3s)+(link:&quot;Pull the lever.&quot;)[(t8n-time:1.3s)[[Are you sure?-&gt;letterpuzzlesuccess]]]])]
+(if:_hand is false)[(show:(t8n-time:1.3s)+(link:&quot;Put your hand in the fourth hole.&quot;)[(set:_hand to true)You reach inside, and feel a lever. (t8n-time:1.3s)+(link:&quot;Pull the lever.&quot;)[(t8n-time:1.3s)[[Are you sure?-&gt;letterpuzzlefailure]]]])]
+(if:_hand is false)[(show:(t8n-time:1.3s)+(link:&quot;Put your hand in the fifth hole.&quot;)[(set:_hand to true)You reach inside, and feel a lever. (t8n-time:1.3s)+(link:&quot;Pull the lever.&quot;)[(t8n-time:1.3s)[[Are you sure?-&gt;letterpuzzlefailure]]]])]
+(if:_hand is true)[(show:(t8n-time:1.3s)+(link-repeat:&quot;Remove your hand from the hole.&quot;)[(set:_hand to false)])](stop:)</tw-passagedata><tw-passagedata pid="39" name="letterpuzzlefailure" tags="" position="2311,1190" size="100,100">(set: $leverdeaths to (a:&quot;You pull the lever, and feel the rock underneath give way. You fall in the darkness for so long, it&#39;s almost a relief when the end comes.&quot;,&quot;Nothing happens after pulling the lever.. then rocks fall and you die.&quot;,&quot;You hear a woman faintly yelling &#96;\&quot;Wrong lever!\&quot;&#96; as the door crushes you.&quot;))
+(either:...$leverdeaths)
+
+(t8n-time:1.3s)+(link:&quot;Try Again&quot;)[(restart:)]</tw-passagedata><tw-passagedata pid="40" name="gamepath6" tags="" position="1753,1008" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="41" name="waterfall" tags="" position="1498,772" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="42" name="Road4" tags="" position="1294,742" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="43" name="letterpuzzlesuccess" tags="" position="2032,1309" size="100,100">Double-click this passage to edit it.</tw-passagedata><tw-passagedata pid="44" name="footer" tags="" position="258,4" size="100,100">This game was created by Sara Jeffers. If you&#39;d like to support her, (t8n-time:1.3s)+(link-repeat:&quot;click here&quot;)[(open-url:&quot;https://www.patreon.com/babayagacreative&quot;)]. If you&#39;d like to contact her, (t8n-time:1.3s)+(link-rerun:&quot;click here&quot;)[(open-url:&quot;https://form.jotform.com/210336779938166&quot;)].</tw-passagedata></tw-storydata>
 <script title="Twine engine code" data-main="harlowe">"use strict";var _slicedToArray=function(){return function(e,t){if(Array.isArray(e))return e;if(Symbol.iterator in Object(e))return function(e,t){var n=[],r=!0,i=!1,a=void 0;try{for(var o,s=e[Symbol.iterator]();!(r=(o=s.next()).done)&&(n.push(o.value),!t||n.length!==t);r=!0);}catch(e){i=!0,a=e}finally{try{!r&&s.return&&s.return()}finally{if(i)throw a}}return n}(e,t);throw new TypeError("Invalid attempt to destructure non-iterable instance")}}(),_typeof="function"==typeof Symbol&&"symbol"==typeof Symbol.iterator?function(e){return typeof e}:function(e){return e&&"function"==typeof Symbol&&e.constructor===Symbol&&e!==Symbol.prototype?"symbol":typeof e};function _defineProperty(e,t,n){return t in e?Object.defineProperty(e,t,{value:n,enumerable:!0,configurable:!0,writable:!0}):e[t]=n,e}function _toConsumableArray(e){if(Array.isArray(e)){for(var t=0,n=Array(e.length);t<e.length;t++)n[t]=e[t];return n}return Array.from(e)}!function(){
 /**
  * @license almond 0.3.3 Copyright jQuery Foundation and other contributors.
